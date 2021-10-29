@@ -12,7 +12,7 @@ https://github.com/c17hawke/dvc-ML-demo-AIOps
 
 * open and project folder in VS code then follow below command -
 
-'''bash
+''' bash
 echo "# dvc-ML-demo-AIOps" >> README.md
 git init
 git add README.md
