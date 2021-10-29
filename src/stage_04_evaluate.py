@@ -1,7 +1,7 @@
 # from src.utils.all_utils import read_yaml
 # from utils.all_utils import read_config
 from sklearn.metrics.regression import r2_score
-from src.utils.all_utils import read_yaml,create_directory,save_local_df
+from src.utils.all_utils import read_yaml,create_directory,save_reports
 import argparse
 import pandas as pd
 import os
@@ -60,6 +60,26 @@ def evaluate(config_path,params_path):
     predicted_values = lr.predict(test_x)
 
     rmse,mae,r2 = evaluate_metrics(test_y,predicted_values)
+
+
+    scores_dir = config["artifacts"]["reports_dir"]
+    scores_filename = config["artifacts"]["scores"]
+
+
+    scores_dir_path = os.path.join(artifacts_dir,scores_dir)
+    create_directory([scores_dir_path])
+
+
+    scores_filepath = os.path.join(scores_dir_path,scores_filename)
+    print(scores_filepath)
+
+    scores = {
+        "rmse" : rmse,
+        "mae"  : mae,
+        "r2"   : r2,
+    }
+
+    save_reports(report=scores, report_path=scores_filepath)
     print(rmse,mae,r2)
     # lr.fit(train_x,train_y)
 
